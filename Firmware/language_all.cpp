@@ -854,7 +854,7 @@ const char * const MSG_FW_VERSION_RC_LANG_TABLE[LANG_NUM] PROGMEM = {
 	MSG_FW_VERSION_RC_CZ
 };
 
-const char MSG_FW_VERSION_UNKNOWN_EN[] PROGMEM = "WARNING: This is an unofficial, unsupported build. Use at your own risk!";
+const char MSG_FW_VERSION_UNKNOWN_EN[] PROGMEM = "WARNING: This is an unofficial, unsupported build. From the Mz Lab :O";
 const char MSG_FW_VERSION_UNKNOWN_CZ[] PROGMEM = "VAROVANI: Neznama, nepodporovana verze firmware. Pouziti na vlastni nebezpeci!";
 const char * const MSG_FW_VERSION_UNKNOWN_LANG_TABLE[LANG_NUM] PROGMEM = {
 	MSG_FW_VERSION_UNKNOWN_EN,
