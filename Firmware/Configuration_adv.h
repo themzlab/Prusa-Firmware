@@ -127,8 +127,6 @@
 //END AUTOSET LOCATIONS OF LIMIT SWITCHES -ZP
 
 
-//#define Z_LATE_ENABLE // Enable Z the last moment. Needed if your Z driver overheats.
-
 // A single Z stepper driver is usually used to drive 2 stepper motors.
 // Uncomment this define to utilize a separate stepper driver for each Z axis motor.
 // Only a few motherboards support this, like RAMPS, which have dual extruder support (the 2nd, often unused, extruder driver is used
@@ -282,16 +280,6 @@
   #define PROGRESS_MSG_EXPIRE   0
   // Enable this to show messages for MSG_TIME then hide them
   //#define PROGRESS_MSG_ONCE
-#endif
-
-// The hardware watchdog should reset the microcontroller disabling all outputs, in case the firmware gets stuck and doesn't do temperature regulation.
-//#define USE_WATCHDOG
-
-#ifdef USE_WATCHDOG
-// If you have a watchdog reboot in an ArduinoMega2560 then the device will hang forever, as a watchdog reset will leave the watchdog on.
-// The "WATCHDOG_RESET_MANUAL" goes around this by not using the hardware reset.
-//  However, THIS FEATURE IS UNSAFE!, as it will only work if interrupts are disabled. And the code could hang in an interrupt routine with interrupts disabled.
-//#define WATCHDOG_RESET_MANUAL
 #endif
 
 // Enable the option to stop SD printing when hitting and endstops, needs to be enabled from the LCD menu when this option is enabled.
