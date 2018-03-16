@@ -1,8 +1,8 @@
 /*****************************************************************
-* Rambo mini 1.3 Pin Assignments
+* Rambo mini 1.0 Pin Assignments
 ******************************************************************/
 
-#define ELECTRONICS "RAMBo13a"
+#define ELECTRONICS "RAMBo10a"
 
 #define KNOWN_BOARD
 #ifndef __AVR_ATmega2560__
@@ -38,16 +38,10 @@
 #define TEMP_1_PIN              1
 #define TEMP_2_PIN             -1
 
-#ifdef SNMM 
+#ifdef SNMM
   #define E_MUX0_PIN           17
   #define E_MUX1_PIN           16
   #define E_MUX2_PIN           84
-#endif
-
-#ifdef DIS
-  #define D_REQUIRE            30
-  #define D_DATA               20
-  #define D_DATACLOCK          21
 #endif
 
 // The SDSS pin uses a different pin mapping from file Sd2PinMap.h
@@ -59,21 +53,21 @@
   #define MISO_PIN             50
   #define MOSI_PIN             51
 #endif
+  
+#define BEEPER                 78
 
-#define BEEPER                 84
+#define BTN_EN1                80
+#define BTN_EN2                73
+#define BTN_ENC                21
 
-#define BTN_EN1                72
-#define BTN_EN2                14
-#define BTN_ENC                 9
+#define SDCARDDETECT           72
 
-#define SDCARDDETECT           15
-
-#define LCD_PINS_RS            82
-#define LCD_PINS_ENABLE        18
-#define LCD_PINS_D4            19
-#define LCD_PINS_D5            70
-#define LCD_PINS_D6            85
-#define LCD_PINS_D7            71
+#define LCD_PINS_RS            38
+#define LCD_PINS_ENABLE         5
+#define LCD_PINS_D4            14
+#define LCD_PINS_D5            15
+#define LCD_PINS_D6            32
+#define LCD_PINS_D7            31
 
 #define E0_STEP_PIN            34
 #define E0_DIR_PIN             43
@@ -81,13 +75,11 @@
 #define E0_MS1_PIN             65
 #define E0_MS2_PIN             66
 #define LED_PIN                13
-
 #ifdef THREEMM_PRINTER
   #define FAN_PIN               8
 #else
   #define FAN_PIN               6
 #endif
-
 #define KILL_PIN               -1 //80 with Smart Controller LCD
 #define SUICIDE_PIN            -1  //PIN that has to be turned on right after start, to keep power flowing.
 #define SDPOWER                -1
