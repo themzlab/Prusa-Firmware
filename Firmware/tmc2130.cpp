@@ -50,7 +50,7 @@ uint8_t tmc2130_sg_thr_home[4] = {3, 3, TMC2130_SG_THRS_Z, TMC2130_SG_THRS_E};
 uint8_t sg_homing_axes_mask = 0x00;
 
 uint8_t tmc2130_sg_meassure = 0xff;
-uint32_t tmc2130_sg_meassure_cnt = 0;
+uint16_t tmc2130_sg_meassure_cnt = 0;
 uint32_t tmc2130_sg_meassure_val = 0;
 
 uint8_t tmc2130_home_enabled = 0;
@@ -185,13 +185,10 @@ void tmc2130_init()
 	tmc2130_sg_cnt[2] = 0;
 	tmc2130_sg_cnt[3] = 0;
 
-#ifdef TMC2130_LINEARITY_CORRECTION
 	tmc2130_set_wave(X_AXIS, 247, tmc2130_wave_fac[X_AXIS]);
 	tmc2130_set_wave(Y_AXIS, 247, tmc2130_wave_fac[Y_AXIS]);
 	tmc2130_set_wave(Z_AXIS, 247, tmc2130_wave_fac[Z_AXIS]);
 	tmc2130_set_wave(E_AXIS, 247, tmc2130_wave_fac[E_AXIS]);
-#endif //TMC2130_LINEARITY_CORRECTION
-
 }
 
 uint8_t tmc2130_sample_diag()
@@ -675,10 +672,10 @@ uint16_t tmc2130_get_res(uint8_t axis)
 void tmc2130_set_res(uint8_t axis, uint16_t res)
 {
 	tmc2130_mres[axis] = tmc2130_usteps2mres(res);
-//	uint32_t u = micros();
+	uint32_t u = micros();
 	tmc2130_setup_chopper(axis, tmc2130_mres[axis], tmc2130_current_h[axis], tmc2130_current_r[axis]);
-//	u = micros() - u;
-//	printf_P(PSTR("tmc2130_setup_chopper %c %lu us"), "XYZE"[axis], u);
+	u = micros() - u;
+	printf_P(PSTR("tmc2130_setup_chopper %c %lu us"), "XYZE"[axis], u);
 }
 
 uint8_t tmc2130_get_pwr(uint8_t axis)
@@ -951,7 +948,7 @@ uint8_t clusterize_uint8(uint8_t* data, uint8_t size, uint8_t* ccnt, uint8_t* cv
 	return ++cl;
 }
 
-bool tmc2130_home_calibrate(uint8_t axis)
+void tmc2130_home_calibrate(uint8_t axis)
 {
 	uint8_t step[16];
 	uint8_t cnt[16];
@@ -970,7 +967,6 @@ bool tmc2130_home_calibrate(uint8_t axis)
 	printf_P(PSTR("result value: %d\n"), tmc2130_home_origin[axis]);
 	if (axis == X_AXIS) eeprom_update_byte((uint8_t*)EEPROM_TMC2130_HOME_X_ORIGIN, tmc2130_home_origin[X_AXIS]);
 	else if (axis == Y_AXIS) eeprom_update_byte((uint8_t*)EEPROM_TMC2130_HOME_Y_ORIGIN, tmc2130_home_origin[Y_AXIS]);
-	return true;
 }
 
 #endif //TMC2130

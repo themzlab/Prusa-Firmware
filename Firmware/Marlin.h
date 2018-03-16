@@ -218,7 +218,6 @@ enum AxisEnum {X_AXIS=0, Y_AXIS=1, Z_AXIS=2, E_AXIS=3, X_HEAD=4, Y_HEAD=5};
 
 void FlushSerialRequestResend();
 void ClearToSend();
-void update_currents();
 
 void get_coordinates();
 void prepare_move();
@@ -282,6 +281,17 @@ extern void homeaxis(int axis, uint8_t cnt = 1, uint8_t* pstep = 0);
 
 #ifdef FAN_SOFT_PWM
 extern unsigned char fanSpeedSoftPwm;
+#endif
+
+
+#ifdef FILAMENT_SENSOR
+  extern float filament_width_nominal;  //holds the theoretical filament diameter ie., 3.00 or 1.75
+  extern bool filament_sensor;  //indicates that filament sensor readings should control extrusion
+  extern float filament_width_meas; //holds the filament diameter as accurately measured
+  extern signed char measurement_delay[];  //ring buffer to delay measurement
+  extern int delay_index1, delay_index2;  //index into ring buffer
+  extern float delay_dist; //delay distance counter
+  extern int meas_delay_cm; //delay distance
 #endif
 
 #ifdef FWRETRACT
@@ -348,7 +358,7 @@ extern bool sortAlpha;
 
 extern char dir_names[3][9];
 
-extern void calculate_extruder_multipliers();
+extern void calculate_volumetric_multipliers();
 
 // Similar to the default Arduino delay function, 
 // but it keeps the background tasks running.
@@ -370,7 +380,6 @@ void temp_compensation_apply();
 void temp_compensation_start();
 void show_fw_version_warnings();
 void erase_eeprom_section(uint16_t offset, uint16_t bytes);
-uint8_t check_printer_version();
 
 #ifdef PINDA_THERMISTOR
 float temp_compensation_pinda_thermistor_offset(float temperature_pinda);
@@ -383,10 +392,7 @@ bool check_commands();
 void uvlo_();
 void recover_print(uint8_t automatic); 
 void setup_uvlo_interrupt();
-
-#if defined(TACH_1) && TACH_1 >-1
 void setup_fan_interrupt();
-#endif
 
 extern void recover_machine_state_after_power_panic();
 extern void restore_print_from_eeprom();
@@ -435,8 +441,7 @@ void force_high_power_mode(bool start_high_power_section);
 #endif //TMC2130
 
 // G-codes
-bool gcode_M45(bool onlyZ, int8_t verbosity_level);
-void gcode_M114();
+bool gcode_M45(bool onlyZ);
 void gcode_M701();
 
 #define UVLO !(PINE & (1<<4))

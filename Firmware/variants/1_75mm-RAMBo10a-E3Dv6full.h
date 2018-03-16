@@ -2,29 +2,26 @@
 #define CONFIGURATION_PRUSA_H
 
 /*------------------------------------
-GENERAL SETTINGS
+    GENERAL SETTINGS
 *------------------------------------*/
 
 // Printer revision
-#define FILAMENT_SIZE "1_75mm_MK2"
+#define FILAMENT_SIZE "1_75mm"
 #define NOZZLE_TYPE "E3Dv6full"
 
-// Developer flag
-#define DEVELOPER
-
 // Printer name
-#define CUSTOM_MENDEL_NAME "Prusa i3 MK2"
+#define CUSTOM_MENDEL_NAME "Prusa i3"
 
 // Electronics
-#define MOTHERBOARD BOARD_RAMBO_MINI_1_3
+#define MOTHERBOARD BOARD_RAMBO_MINI_1_0
 
 
 /*------------------------------------
-AXIS SETTINGS
+    AXIS SETTINGS
 *------------------------------------*/
 
 // Steps per unit {X,Y,Z,E}
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,161.3}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/0.8,161.3}
 
 // Endstop inverting
 const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
@@ -33,37 +30,36 @@ const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 
 // Home position
 #define MANUAL_X_HOME_POS 0
-#define MANUAL_Y_HOME_POS -2.2
-#define MANUAL_Z_HOME_POS 0.2
+#define MANUAL_Y_HOME_POS 0
+#define MANUAL_Z_HOME_POS 0.25
 
 // Travel limits after homing
-#define X_MAX_POS 255
+#define X_MAX_POS 214
 #define X_MIN_POS 0
-#define Y_MAX_POS 210
-#define Y_MIN_POS -4
-#define Z_MAX_POS 210
-#define Z_MIN_POS 0.2
+#define Y_MAX_POS 198
+#define Y_MIN_POS 0
+#define Z_MAX_POS 201
+#define Z_MIN_POS 0.23
 
 // Canceled home position
 #define X_CANCEL_POS 50
-#define Y_CANCEL_POS 190
+#define Y_CANCEL_POS 180
 
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
-#define HOMING_FEEDRATE {3000, 3000, 800, 0}  // set the homing speeds (mm/min)
+#define HOMING_FEEDRATE {3000, 3000, 240, 0}  // set the homing speeds (mm/min)
 
-#define DEFAULT_MAX_FEEDRATE          {500, 500, 1000, 25}    // (mm/sec)
-#define DEFAULT_MAX_ACCELERATION      {9000,9000,1000,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
+#define DEFAULT_MAX_FEEDRATE          {500, 500, 3, 25}    // (mm/sec)
+#define DEFAULT_MAX_ACCELERATION      {9000,9000,30,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
 #define DEFAULT_ACCELERATION          3000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000   // X, Y, Z and E max acceleration in mm/s^2 for retracts
 
 
-#define MANUAL_FEEDRATE {3000, 3000, 1000, 100}   // set the speeds for manual moves (mm/min)
+#define MANUAL_FEEDRATE {3000, 3000, 240, 60}   // set the speeds for manual moves (mm/min)
 
-#define Z_AXIS_ALWAYS_ON 1
 
 /*------------------------------------
-EXTRUDER SETTINGS
+    EXTRUDER SETTINGS
 *------------------------------------*/
 
 // Mintemps
@@ -73,9 +69,9 @@ EXTRUDER SETTINGS
 #define BED_MINTEMP 15
 
 // Maxtemps
-#define HEATER_0_MAXTEMP 305
-#define HEATER_1_MAXTEMP 305
-#define HEATER_2_MAXTEMP 305
+#define HEATER_0_MAXTEMP 310
+#define HEATER_1_MAXTEMP 310
+#define HEATER_2_MAXTEMP 310
 #define BED_MAXTEMP 150
 
 // Define PID constants for extruder
@@ -96,7 +92,7 @@ EXTRUDER SETTINGS
 
 
 /*------------------------------------
-LOAD/UNLOAD FILAMENT SETTINGS
+    LOAD/UNLOAD FILAMENT SETTINGS
 *------------------------------------*/
 
 // Load filament commands
@@ -109,51 +105,44 @@ LOAD/UNLOAD FILAMENT SETTINGS
 #define UNLOAD_FILAMENT_1 "G1 E-80 F400"
 
 /*------------------------------------
-CHANGE FILAMENT SETTINGS
-*------------------------------------*/
+    CHANGE FILAMENT SETTINGS
+*------------------------------------*/    
 
 // Filament change configuration
 #define FILAMENTCHANGEENABLE
-#ifdef FILAMENTCHANGEENABLE
-#define FILAMENTCHANGE_XPOS 211
-#define FILAMENTCHANGE_YPOS 0
-#define FILAMENTCHANGE_ZADD 2
-#define FILAMENTCHANGE_FIRSTRETRACT -2
-#define FILAMENTCHANGE_FINALRETRACT -80
+  #ifdef FILAMENTCHANGEENABLE
+    #define FILAMENTCHANGE_XPOS 211
+    #define FILAMENTCHANGE_YPOS 0
+    #define FILAMENTCHANGE_ZADD 2
+    #define FILAMENTCHANGE_FIRSTRETRACT -2
+    #define FILAMENTCHANGE_FINALRETRACT -80
+    
+    #define FILAMENTCHANGE_FIRSTFEED 70
+    #define FILAMENTCHANGE_FINALFEED 50
+    #define FILAMENTCHANGE_RECFEED 5
 
-#define FILAMENTCHANGE_FIRSTFEED 70
-#define FILAMENTCHANGE_FINALFEED 50
-#define FILAMENTCHANGE_RECFEED 5
-
-#define FILAMENTCHANGE_XYFEED 50
-#define FILAMENTCHANGE_EFEED 20
-#define FILAMENTCHANGE_RFEED 400
-#define FILAMENTCHANGE_EXFEED 2
-#define FILAMENTCHANGE_ZFEED 15
+    #define FILAMENTCHANGE_XYFEED 70
+    #define FILAMENTCHANGE_EFEED 20
+    #define FILAMENTCHANGE_RFEED 400
+    #define FILAMENTCHANGE_EXFEED 2
+    #define FILAMENTCHANGE_ZFEED 300
 
 #endif
 
 /*------------------------------------
-ADDITIONAL FEATURES SETTINGS
-*------------------------------------*/
+    ADDITIONAL FEATURES SETTINGS
+*------------------------------------*/  
 
 // Define Prusa filament runout sensor
 //#define FILAMENT_RUNOUT_SUPPORT
 
 #ifdef FILAMENT_RUNOUT_SUPPORT
-#define FILAMENT_RUNOUT_SENSOR 1
+    #define FILAMENT_RUNOUT_SENSOR 1
 #endif
 
-// temperature runaway
-//#define TEMP_RUNAWAY_BED_HYSTERESIS 5
-//#define TEMP_RUNAWAY_BED_TIMEOUT 360
-
-#define TEMP_RUNAWAY_EXTRUDER_HYSTERESIS 15
-#define TEMP_RUNAWAY_EXTRUDER_TIMEOUT 45
-
 /*------------------------------------
-MOTOR CURRENT SETTINGS
-*------------------------------------*/
+    MOTOR CURRENT SETTINGS
+*------------------------------------*/  
 
 // Motor Current setting for BIG RAMBo
 #define DIGIPOT_MOTOR_CURRENT {135,135,135,135,135} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
@@ -161,91 +150,17 @@ MOTOR CURRENT SETTINGS
 
 // Motor Current settings for RAMBo mini PWM value = MotorCurrentSetting * 255 / range
 #if MOTHERBOARD == 102 || MOTHERBOARD == 302
-#define MOTOR_CURRENT_PWM_RANGE 2000
-#define DEFAULT_PWM_MOTOR_CURRENT  {270, 830, 450} // {XY,Z,E}
-#define DEFAULT_PWM_MOTOR_CURRENT_LOUD  {540, 830, 500} // {XY,Z,E}
+  #define MOTOR_CURRENT_PWM_RANGE 2000
+  #define DEFAULT_PWM_MOTOR_CURRENT  {270, 450, 450} // {XY,Z,E}
+  #define DEFAULT_PWM_MOTOR_CURRENT_LOUD  {540, 450, 500} // {XY,Z,E}
 #endif
 
 /*------------------------------------
-BED SETTINGS
-*------------------------------------*/
+    PREHEAT SETTINGS
+*------------------------------------*/  
 
-// Define Mesh Bed Leveling system to enable it
-#define MESH_BED_LEVELING
-#ifdef MESH_BED_LEVELING
-
-#define MBL_Z_STEP 0.01
-
-// Mesh definitions
-#define MESH_MIN_X 35
-#define MESH_MAX_X 238
-#define MESH_MIN_Y 6
-#define MESH_MAX_Y 202
-
-// Mesh upsample definition
-#define MESH_NUM_X_POINTS 7
-#define MESH_NUM_Y_POINTS 7
-// Mesh measure definition
-#define MESH_MEAS_NUM_X_POINTS 3
-#define MESH_MEAS_NUM_Y_POINTS 3
-
-#define MESH_HOME_Z_CALIB 0.2
-#define MESH_HOME_Z_SEARCH 5
-
-#define X_PROBE_OFFSET_FROM_EXTRUDER 23     // Z probe to nozzle X offset: -left  +right
-#define Y_PROBE_OFFSET_FROM_EXTRUDER 9     // Z probe to nozzle Y offset: -front +behind
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.4  // Z probe to nozzle Z offset: -below (always!)
-#endif
-
-// Bed Temperature Control
-// Select PID or bang-bang with PIDTEMPBED. If bang-bang, BED_LIMIT_SWITCHING will enable hysteresis
-//
-// Uncomment this to enable PID on the bed. It uses the same frequency PWM as the extruder.
-// If your PID_dT above is the default, and correct for your hardware/configuration, that means 7.689Hz,
-// which is fine for driving a square wave into a resistive load and does not significantly impact you FET heating.
-// This also works fine on a Fotek SSR-10DA Solid State Relay into a 250W heater.
-// If your configuration is significantly different than this and you don't understand the issues involved, you probably
-// shouldn't use bed PID until someone else verifies your hardware works.
-// If this is enabled, find your own PID constants below.
-#define PIDTEMPBED
-//
-//#define BED_LIMIT_SWITCHING
-
-// This sets the max power delivered to the bed, and replaces the HEATER_BED_DUTY_CYCLE_DIVIDER option.
-// all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
-// setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
-// so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
-
-// Bed temperature compensation settings
-#define BED_OFFSET 10
-#define BED_OFFSET_START 40
-#define BED_OFFSET_CENTER 50
-
-
-#ifdef PIDTEMPBED
-//120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-//from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-#define  DEFAULT_bedKp 126.13
-#define  DEFAULT_bedKi 4.30
-#define  DEFAULT_bedKd 924.76
-
-//120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-//from pidautotune
-//    #define  DEFAULT_bedKp 97.1
-//    #define  DEFAULT_bedKi 1.41
-//    #define  DEFAULT_bedKd 1675.16
-
-// FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
-#endif // PIDTEMPBED
-
-
-/*-----------------------------------
-PREHEAT SETTINGS
-*------------------------------------*/
-
-#define PLA_PREHEAT_HOTEND_TEMP 215
-#define PLA_PREHEAT_HPB_TEMP 55
+#define PLA_PREHEAT_HOTEND_TEMP 210
+#define PLA_PREHEAT_HPB_TEMP 50
 #define PLA_PREHEAT_FAN_SPEED 0  
 
 #define ABS_PREHEAT_HOTEND_TEMP 255
@@ -268,8 +183,22 @@ PREHEAT SETTINGS
 #define FLEX_PREHEAT_HPB_TEMP 50
 #define FLEX_PREHEAT_FAN_SPEED 0 
 
+// This sets the max power delivered to the bed, and replaces the HEATER_BED_DUTY_CYCLE_DIVIDER option.
+// all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
+// setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
+// so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
+#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+
+// temperature runaway
+//#define TEMP_RUNAWAY_BED_HYSTERESIS 5
+//#define TEMP_RUNAWAY_BED_TIMEOUT 360
+
+#define TEMP_RUNAWAY_EXTRUDER_HYSTERESIS 15
+#define TEMP_RUNAWAY_EXTRUDER_TIMEOUT 45
+
+
 /*------------------------------------
-THERMISTORS SETTINGS
+    THERMISTORS SETTINGS
 *------------------------------------*/
 
 //
